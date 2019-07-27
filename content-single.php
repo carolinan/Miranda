@@ -1,6 +1,8 @@
 <?php
 /**
- * @package miranda
+ * The template part for displaying single posts.
+ *
+ * @package Miranda
  */
 
 ?>
@@ -17,15 +19,17 @@
 	<div class="entry-content">
 		<?php
 		if ( has_post_thumbnail() ) {
-				the_post_thumbnail();
+			the_post_thumbnail();
 		}
 
 		the_content();
 
-		wp_link_pages( array(
-			'before' => '<div class="page-links">' . __( 'Pages:', 'miranda' ),
-			'after'  => '</div>',
-		) );
+		wp_link_pages(
+			array(
+				'before' => '<div class="page-links">' . __( 'Pages:', 'miranda' ),
+				'after'  => '</div>',
+			)
+		);
 		?>
 	</div><!-- .entry-content -->
 

@@ -4,7 +4,7 @@
  *
  * Eventually, some of the functionality here could be replaced by core features.
  *
- * @package miranda
+ * @package Miranda
  */
 
 if ( ! function_exists( 'miranda_posted_on' ) ) :
@@ -17,7 +17,8 @@ if ( ! function_exists( 'miranda_posted_on' ) ) :
 			$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
 		}
 
-		$time_string = sprintf( $time_string,
+		$time_string = sprintf(
+			$time_string,
 			esc_attr( get_the_date( 'c' ) ),
 			esc_html( get_the_date() ),
 			esc_attr( get_the_modified_date( 'c' ) ),
@@ -62,3 +63,13 @@ if ( ! function_exists( 'miranda_entry_footer' ) ) :
 		}
 	}
 endif;
+
+/**
+ * Add a pingback url if pings are enabled.
+ */
+function miranda_pingback_header() {
+	if ( is_singular() && pings_open() ) {
+		echo '<link rel="pingback" href="', esc_url( get_bloginfo( 'pingback_url' ) ), '">';
+	}
+}
+add_action( 'wp_head', 'miranda_pingback_header' );

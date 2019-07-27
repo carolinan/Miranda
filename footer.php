@@ -4,25 +4,65 @@
  *
  * Contains the closing of the #content div and all content after
  *
- * @package miranda
+ * @package Miranda
  */
 
 ?>
 	</div><!-- #content -->
 
 	<footer id="colophon" class="site-footer" role="contentinfo">
-		<h1 class="screen-reader-text"><?php esc_html_e( 'Footer Content', 'miranda' ); ?></h1>
+		<h2 class="screen-reader-text"><?php esc_html_e( 'Footer Content', 'miranda' ); ?></h2>
+		<?php
+		if ( is_active_sidebar( 'sidebar-3' ) ) {
+			?>
+			<div class="widget-area" role="complementary" itemscope="itemscope" itemtype="https://schema.org/WPSideBar">
+			<?php dynamic_sidebar( 'sidebar-3' ); ?>
+			</div>
+			<?php
+		}
 
-		<?php if ( get_theme_mod( 'miranda_social_footer' ) && has_nav_menu( 'social' ) ) { ?>
+		if ( get_theme_mod( 'miranda_social_footer' ) && has_nav_menu( 'social' ) ) {
+			?>
 			<nav class="social-menu" role="navigation" aria-label="<?php esc_attr_e( 'Social Media', 'miranda' ); ?>">
-				<?php wp_nav_menu( array( 'theme_location' => 'social', 'fallback_cb' => false, 'depth' => 1, 'link_before' => '<span class="screen-reader-text">', 'link_after' => '</span>' ) ); ?>
+				<?php
+				wp_nav_menu(
+					array(
+						'theme_location' => 'social',
+						'fallback_cb'    => false,
+						'depth'          => 1,
+						'link_before'    => '<span class="screen-reader-text">',
+						'link_after'     => '</span>',
+					)
+				);
+				?>
 			</nav><!-- #social-menu -->
-		<?php };?>
+			<?php
+		}
+		?>
 
 		<div class="site-info">
-			<a href="<?php echo esc_url( __( 'http://wordpress.org/', 'miranda' ) ); ?>"><?php printf( esc_html__( 'Proudly powered by %s', 'miranda' ), 'WordPress' ); ?></a>
-			<span class="sep"> | </span>
-			<a href="<?php echo esc_url( 'http://wptema.se/miranda' ); ?>" rel="nofollow"><?php printf( esc_html__( 'Theme: %1$s by Carolina', 'miranda' ), 'Miranda' ); ?></a>
+			<?php
+			if ( function_exists( 'the_privacy_policy_link' ) ) {
+				if ( ! get_theme_mod( 'miranda_hide_credits' ) ) {
+					the_privacy_policy_link( '', '<span class="sep"> | </span>' );
+				} else {
+					the_privacy_policy_link( '', '' );
+				}
+			}
+
+			if ( ! get_theme_mod( 'miranda_hide_credits' ) ) {
+				?>
+				<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'miranda' ) ); ?>"><?php printf( esc_html__( 'Proudly powered by %s', 'miranda' ), 'WordPress' ); ?></a>
+				<span class="sep"> | </span>
+				<a href="<?php echo esc_url( 'https://theme.tips' ); ?>" rel="nofollow">
+				<?php
+				/* translators: %1$s: Theme name */
+				printf( esc_html__( 'Theme: %1$s by Carolina', 'miranda' ), 'Miranda' );
+				?>
+				</a>
+				<?php
+			}
+			?>
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->
 </div><!-- #page -->

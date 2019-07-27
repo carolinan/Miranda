@@ -57,22 +57,14 @@
 
 });	
 
-
-
 } )();
-
-
-
-
-
-
 
 
 jQuery(document).ready(function($){
 	/* Thanks to: Keyboard Accessible Dropdown Menus
 	Copyright 2013 Amy Hendrix (email : amy@amyhendrix.net), Graham Armfield (email : graham.armfield@coolfields.co.uk)
 	License:      MIT
-	Plugin URI:   http://github.com/sabreuse/accessible-menus
+	Plugin URI:   https://github.com/sabreuse/accessible-menus
 	*/
 	
 	$('.main-navigation li').hover(

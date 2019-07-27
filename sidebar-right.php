@@ -1,21 +1,12 @@
 <?php
 /**
- * The template for displaying all single posts.
+ * Template Name: Sidebar Right
+ * Template Post Type: post, page
  *
  * @package Miranda
  */
 
-get_header();
-
-if ( is_active_sidebar( 'sidebar-1' ) ) {
-	?>
-	<div class="widget-area sidebar-1" role="complementary">
-		<h2 class="screen-reader-text"><?php esc_html_e( 'Sidebar', 'miranda' ); ?></h2>
-		<?php dynamic_sidebar( 'sidebar-1' ); ?>
-	</div>
-	<?php
-}
-?>
+get_header(); ?>
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
@@ -46,10 +37,10 @@ if ( is_active_sidebar( 'sidebar-1' ) ) {
 <?php
 if ( is_active_sidebar( 'sidebar-2' ) ) {
 	?>
-	<div class="widget-area sidebar-2" role="complementary">
+	<aside class="widget-area sidebar-2" role="complementary">
 		<h2 class="screen-reader-text"><?php esc_html_e( 'Sidebar', 'miranda' ); ?></h2>
 		<?php dynamic_sidebar( 'sidebar-2' ); ?>
-	</div>
+</aside>
 	<?php
 }
 

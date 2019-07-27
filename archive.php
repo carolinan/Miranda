@@ -2,53 +2,62 @@
 /**
  * The template for displaying archive pages.
  *
- * Learn more: http://codex.wordpress.org/Template_Hierarchy
+ * Learn more: https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
  * @package Miranda
  */
 
-get_header(); ?>
+get_header();
+
+if ( is_active_sidebar( 'sidebar-1' ) ) {
+	?>
+	<div class="widget-area sidebar-1" role="complementary">
+		<h2 class="screen-reader-text"><?php esc_html_e( 'Sidebar', 'miranda' ); ?></h2>
+		<?php dynamic_sidebar( 'sidebar-1' ); ?>
+	</div>
+	<?php
+}
+?>
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
-
-		<?php if ( have_posts() ) : ?>
-
+		<?php
+		if ( have_posts() ) {
+			?>
 			<header class="page-header">
 				<?php
-					the_archive_title( '<h1 class="page-title">', '</h1>' );
-					the_archive_description( '<div class="taxonomy-description">', '</div>' );
+				the_archive_title( '<h1 class="page-title">', '</h1>' );
+				the_archive_description( '<div class="taxonomy-description">', '</div>' );
 				?>
 			</header><!-- .page-header -->
+			<?php
+			if ( get_theme_mod( 'miranda_navigation_position' ) === 'both' || get_theme_mod( 'miranda_navigation_position' ) === 'above' ) {
+				the_posts_navigation();
+			}
 
-			<?php the_posts_navigation(); ?>
+			while ( have_posts() ) :
+				the_post();
+				get_template_part( 'content', get_post_format() );
+			endwhile;
 
-			<?php /* Start the Loop */ ?>
-			<?php while ( have_posts() ) : the_post(); ?>
-
-				<?php
-					/* Include the Post-Format-specific template for the content.
-					 * If you want to override this in a child theme, then include a file
-					 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-					 */
-					get_template_part( 'content', get_post_format() );
-				?>
-
-			<?php endwhile; ?>
-
-			<?php the_posts_navigation(); ?>
-
-		<?php else : ?>
-
-			<?php get_template_part( 'content', 'none' ); ?>
-
-		<?php endif; ?>
-
+			if ( get_theme_mod( 'miranda_navigation_position' ) === 'both' || get_theme_mod( 'miranda_navigation_position' ) === 'below' ) {
+				the_posts_navigation();
+			}
+		} else {
+			get_template_part( 'content', 'none' );
+		}
+		?>
 		</main><!-- #main -->
 	</div><!-- #primary -->
 
-
 <?php
-get_sidebar();
-get_footer();
+if ( is_active_sidebar( 'sidebar-2' ) ) {
+	?>
+	<div class="widget-area sidebar-2" role="complementary">
+		<h2 class="screen-reader-text"><?php esc_html_e( 'Sidebar', 'miranda' ); ?></h2>
+		<?php dynamic_sidebar( 'sidebar-2' ); ?>
+	</div>
+	<?php
+}
 
+get_footer();

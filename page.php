@@ -10,12 +10,22 @@
  * @package Miranda
  */
 
-get_header(); ?>
+get_header();
+if ( is_active_sidebar( 'sidebar-1' ) ) {
+	?>
+	<div class="widget-area sidebar-1" role="complementary">
+		<h2 class="screen-reader-text"><?php esc_html_e( 'Sidebar', 'miranda' ); ?></h2>
+		<?php dynamic_sidebar( 'sidebar-1' ); ?>
+	</div>
+	<?php
+}
+?>
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
 			<?php
-			while ( have_posts() ) : the_post();
+			while ( have_posts() ) :
+				the_post();
 				get_template_part( 'content', 'page' );
 
 				// If comments are open or we have at least one comment, load up the comment template.
@@ -27,8 +37,15 @@ get_header(); ?>
 			?>
 		</main><!-- #main -->
 	</div><!-- #primary -->
-	
 <?php
-get_sidebar();
+if ( is_active_sidebar( 'sidebar-2' ) ) {
+	?>
+	<div class="widget-area sidebar-2" role="complementary">
+		<h2 class="screen-reader-text"><?php esc_html_e( 'Sidebar', 'miranda' ); ?></h2>
+		<?php dynamic_sidebar( 'sidebar-2' ); ?>
+	</div>
+	<?php
+}
+
 get_footer();
 

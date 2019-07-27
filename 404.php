@@ -5,7 +5,16 @@
  * @package Miranda
  */
 
-get_header(); ?>
+get_header();
+if ( is_active_sidebar( 'sidebar-1' ) ) {
+	?>
+	<div class="widget-area sidebar-1" role="complementary">
+		<h2 class="screen-reader-text"><?php esc_html_e( 'Sidebar', 'miranda' ); ?></h2>
+		<?php dynamic_sidebar( 'sidebar-1' ); ?>
+	</div>
+	<?php
+}
+?>
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
@@ -37,6 +46,13 @@ get_header(); ?>
 	</div><!-- #primary -->
 
 <?php
-get_sidebar();
+if ( is_active_sidebar( 'sidebar-2' ) ) {
+	?>
+	<div class="widget-area sidebar-2" role="complementary">
+		<h2 class="screen-reader-text"><?php esc_html_e( 'Sidebar', 'miranda' ); ?></h2>
+		<?php dynamic_sidebar( 'sidebar-2' ); ?>
+	</div>
+	<?php
+}
 get_footer();
 
